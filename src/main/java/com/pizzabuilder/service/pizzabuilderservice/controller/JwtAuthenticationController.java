@@ -5,6 +5,9 @@ import com.pizzabuilder.service.pizzabuilderservice.model.JwtRequest;
 import com.pizzabuilder.service.pizzabuilderservice.model.JwtResponse;
 import com.pizzabuilder.service.pizzabuilderservice.model.UserDto;
 import com.pizzabuilder.service.pizzabuilderservice.service.JwtUserDetailsService;
+
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,8 +38,10 @@ public class JwtAuthenticationController {
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
+		final String username = jwtTokenUtil.getUsernameFromToken(token);
+		final Date date = jwtTokenUtil.getExpirationDateFromToken(token);
 
-		return ResponseEntity.ok(new JwtResponse(token));
+		return ResponseEntity.ok(new JwtResponse(token, username, date));
 	}
 
 	@PostMapping("/register")
