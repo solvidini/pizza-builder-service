@@ -13,6 +13,6 @@ Main technologies I used to create this application:
 
 &other
 
-## Live
+## Link to client-side part
 
-currently in progress...
+[Front-end](https://github.com/ssazero/pizza-builder-client/)
