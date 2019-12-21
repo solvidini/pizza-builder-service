@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -13,10 +14,12 @@ public class UserDao {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column
+	@Column(unique = true)
+	@Size(min = 3, message = "Username should have at least 3 chars.")
 	private String username;
 
 	@Column
+	@Size(min = 6, message = "Password should have at least 6 chars.")
 	@JsonIgnore
 	private String password;
 
