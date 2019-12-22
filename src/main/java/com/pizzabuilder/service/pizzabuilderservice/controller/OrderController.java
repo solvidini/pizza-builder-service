@@ -45,7 +45,7 @@ public class OrderController {
 		} else {
 			return new ResponseEntity<Object>("Wrong data", HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<Object>("Order created", HttpStatus.CREATED);
+		return new ResponseEntity<Object>(order, HttpStatus.CREATED);
 	}
 
 	@GetMapping("/orders")
