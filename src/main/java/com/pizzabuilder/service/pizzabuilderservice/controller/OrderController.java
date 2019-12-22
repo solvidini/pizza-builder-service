@@ -1,6 +1,6 @@
 package com.pizzabuilder.service.pizzabuilderservice.controller;
 
-import java.util.List;
+import java.io.Console;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +17,8 @@ import com.pizzabuilder.service.pizzabuilderservice.model.UserDao;
 import com.pizzabuilder.service.pizzabuilderservice.repository.OrderRepository;
 import com.pizzabuilder.service.pizzabuilderservice.repository.UserRepository;
 
-@RestController
 @CrossOrigin
+@RestController
 public class OrderController {
 
 	@Autowired
@@ -35,7 +35,7 @@ public class OrderController {
 	}
 
 	@PostMapping("/orders")
-	public ResponseEntity<Object> createOrder(@RequestBody Order order) throws IllegalAccessException {
+	public ResponseEntity<?> createOrder(@RequestBody Order order) throws IllegalAccessException {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		UserDao user = userDao.findByUsername(username);
 
@@ -45,14 +45,15 @@ public class OrderController {
 		} else {
 			return new ResponseEntity<Object>("Wrong data", HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<Object>(order, HttpStatus.CREATED);
+		return ResponseEntity.ok(order);
 	}
-
+	
+	@CrossOrigin
 	@GetMapping("/orders")
-	public List<Order> retrieveAllUserOrders() {
+	public ResponseEntity<?> retrieveAllUserOrders() {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		UserDao user = userDao.findByUsername(username);
-		return user.getOrders();
+		return ResponseEntity.ok(user.getOrders());
 	}
 
 }
