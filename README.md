@@ -1,4 +1,4 @@
-## General info
+# Pizza Builder Service
 
 This is a microservice I made to store user data and it's orders. Authentication & authorization is done using JWT standard. There's also front-end part of this application made in React.
 
@@ -16,3 +16,6 @@ Main technologies I used to create this application:
 ## Link to client-side part
 
 [Front-end](https://github.com/ssazero/pizza-builder-client/)
+
+## Author
+Samuel Kędziora
